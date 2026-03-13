@@ -1,75 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-<title>My Marketplace</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rameshwaram Elite Institute</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="hero">
+<header>
 
-<h1>Rameshwaram Real Estate</h1>
+<h2 class="logo">Rameshwaram Elite Institute</h2>
 
-<p>Find Your Dream Property in Rameshwaram</p>
-
-<a href="store.html">
-<button class="hero-btn">Explore Properties</button>
-</a>
-
-</div>
-<h2>Owner</h2>
-
-<img src="images/daddy.jpg" class="profile">
-
-<p>Name:Mr.Lokendra Singh</p>
-
-<p>Mobile: 6386892684</p>
-
-</div>
-
-
-<div class="manager-section">
-
-<h2>Assistant Manager</h2>
-
-<img src="images/manager.jpg" class="profile">
-
-<p>Name: Mr. Devendra Singh</p>
-
-<p>Mobile: 8808329614</p>
-
-</div>
-
-
-<div class="enter-store">
-
-<a href="store.html">
-<button class="enter-btn">Enter Store</button>
-</a>
-
-</div>
-
-</body>
-<nav class="navbar">
-
-<div class="logo">
-Rameshwaram Real Estate
-</div>
-
-<ul class="nav-links">
-
-<li><a href="#">Home</a></li>
-
-<li><a href="store.html">Properties</a></li>
-
-<li><a href="#">About</a></li>
-
-<li><a href="#">Contact</a></li>
-
-</ul>
-
+<nav>
+<a href="#">Home</a>
+<a href="#about">About</a>
+<a href="#streams">Streams</a>
+<a href="#facilities">Facilities</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
 </nav>
 
+</header>
+
+
+<section class="hero">
+
+<h1>Welcome to Rameshwaram Elite Institute</h1>
+
+
+<br>Empowering Students for a Brighter Future</br>
+</section>
+<section decription="Highlights of our school">
+<h2>Quality Education from Class 6 to 12</h2>
+
+<button type="button" onclick="window.location.href='admission.html'">
+Apply Now
+</button>
+
+</section>
+
+
+<section id="about">
+
+<h2>About Our School</h2>
+
+<p>
+Rameshwaram Elite Institute is a leading 10+2 school dedicated to academic excellence,
+discipline, innovation and leadership. Our mission is to prepare students for
+competitive exams, higher education,successful careers and leadership.
+</p>
+
+</section>
+
+
+<section id="streams">
+
+<h2>Senior Secondary Streams</h2>
+
+<div class="card-container">
+
+<div class="card">
+<h3>Science</h3>
+<p>Physics, Chemistry, Mathematics, Biology and Computer Science.</p>
+</div>
+
+<div class="card">
+<h3>Commerce</h3>
+<p>Accountancy, Business Studies and Economics.</p>
+</div>
+
+<div class="card">
+<h3>Arts</h3>
+<p>History, Political Science, Geography and Psychology.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="facilities">
+
+<h2>Facilities</h2>
+
+<div class="facility-grid">
+
+<div class="facility">Smart Classrooms</div>
+<div class="facility">Science Laboratories</div>
+<div class="facility">Computer Lab</div>
+<div class="facility">Sports Ground</div>
+<div class="facility">Library</div>
+<div class="facility">Transport Facility</div>
+
+</div>
+
+</section>
+
+
+<section id="gallery">
+
+<h2>School Gallery</h2>
+
+<div class="gallery">
+
+<img src="https://picsum.photos/300/200?1">
+<img src="https://picsum.photos/300/200?2">
+<img src="https://picsum.photos/300/200?3">
+<img src="https://picsum.photos/300/200?4">
+
+</div>
+
+</section>
+
+
+<section id="contact">
+
+<h2>Contact Us</h2>
+
+<form>
+
+<input type="text" placeholder="Name" required>
+
+<input type="email" placeholder="Email" required>
+
+<textarea placeholder="Message"></textarea>
+
+<button type="button" onclick="window.location.href='admission.html'">
+Apply Now
+</button>
+
+</form>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 Rameshwaram Elite Institute</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
 </html>

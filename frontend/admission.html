@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Rameshwaram Elite Institute</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Rameshwaram Elite - Admin</a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="login.html" class="nav-link">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Admin Dashboard -->
+  <section style="padding: 2rem; min-height: 100vh; background: var(--light);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+          <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Admin Dashboard
+          </h1>
+          <p id="studentCount" style="color: #6b7280;"></p>
+        </div>
+        <div id="message"></div>
+      </div>
+
+      <div class="table-container">
+        <div style="padding: 1.5rem; background: var(--light); border-bottom: 1px solid #e5e7eb;">
+          <h3 style="color: var(--primary); margin: 0;">All Admitted Students</h3>
+        </div>
+        <table id="studentsTable">
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Email</th>
+              <th>Class</th>
+              <th>Admission Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="studentsTableBody">
+            <tr>
+              <td colspan="5" style="text-align: center; padding: 3rem; color: #9ca3af;">
+                Loading students...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Check if logged in
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = 'login.html';
+    }
+
+    // Load students
+    const loadStudents = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/students', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          const tbody = document.getElementById('studentsTableBody');
+          const countEl = document.getElementById('studentCount');
+          
+          countEl.textContent = `Total Students: ${result.count}`;
+          
+          if (result.data.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 3rem; color: #9ca3af;">
+                  No students found. Admissions will appear here.
+                </td>
+              </tr>
+            `;
+            return;
+          }
+          
+          tbody.innerHTML = result.data.map(student => `
+            <tr>
+              <td><strong>${student.name}</strong></td>
+              <td>${student.email}</td>
+              <td>
+                <span style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                  Class ${student.class}
+                </span>
+              </td>
+              <td>${new Date(student.createdAt).toLocaleDateString('en-IN')}</td>
+              <td>
+                <button onclick="viewStudent('${student._id}')" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--secondary); color: white;">
+                  View
+                </button>
+              </td>
+            </tr>
+          `).join('');
+        } else {
+          document.getElementById('message').innerHTML = `
+            <div class="form-message error">❌ ${result.message}</div>
+          `;
+        }
+      } catch (error) {
+        console.error('Error loading students:', error);
+        document.getElementById('studentsTableBody').innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 3rem; color: #dc2626;">
+              Error loading data. Please refresh.
+            </td>
+          </tr>
+        `;
+      }
+    };
+
+    function viewStudent(id) {
+      alert('Student details view - Feature coming soon!');
+    }
+
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', loadStudents);
+
+    // Refresh every 30 seconds
+    setInterval(loadStudents, 30000);
+  </script>
+</body>
+</html>
